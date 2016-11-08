@@ -1,67 +1,77 @@
-<!doctype html>
-<html ng-app="calc">
-  <head>
-    <title>Фінансовий калькулятор</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
-    <script src="https://code.angularjs.org/1.5.8/i18n/angular-locale_uk-ua.js" charset="utf-8"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
-    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
-    <link rel="stylesheet" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<title>MathJax TeX Test Page</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
 
-    <div ng-controller="calculatorCtrl" class="container">
-        <p>Лабораторна робота №1<br>з фінансової математики<br>студента гр. ПМ-41 <br> Левантовича Богдана <br>Варіант №9<br></p>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+</head>
+<body>
 
-        <h1>Фінансовий калькулятор</h1>
-        <!-- <div style="display:inline-block; min-height:290px;">
-          <div uib-datepicker ng-model="start" class="well well-sm" datepicker-options="options"></div>
-        </div>
-        <div style="display:inline-block; min-height:290px;">
-          <div uib-datepicker ng-model="end" class="well well-sm" datepicker-options="options"></div>
-        </div> -->
+	<!-- <p><br> -->
+		<!-- Контрольна робота<br>з теорії систем<br>студента гр. ПМ-41 <br> Левантовича Богдана <br>Варіант №9<br><br><br>	</p> -->
+	<div ng-controller="myCtrl" class="container">
+
+		<table class="table-bordered">
+			<tr class="text-center">
+				<td> U</td>
+				<td ng-repeat="u in U">{{ u }}</td>
+			</tr>
+			<tr class="text-center">
+				<td> Y</td>
+				<td ng-repeat="y in Y">{{ y }}</td>
+			</tr>
+		</table>
+
+		<br>
+		<p>Середні значення</p>
+		<br><div>
+			{{ generateFormulas(U, 'u').mean }}<br>
+			{{ generateFormulas(U, 'u').harm }}<br>
+			{{ generateFormulas(U, 'u').geom }}<br>
+			{{ generateFormulas(Y, 'y').mean }}<br>
+			{{ generateFormulas(Y, 'y').harm }}<br>
+			{{ generateFormulas(Y, 'y').geom }}<br>
+		</div>
+		<br><br><br>
+		<table class="table-bordered">
+			<th class="text-center" ng-repeat="h in headers">
+				{{ h }}
+			</th>
+			<tr ng-style="minIndex == $index &amp;&amp; {'background-color':'green'}" class="text-center" ng-repeat="row in table">
+				<td>{{ $index + 1}}</td>
+				<td>{{ row[0].toFixed(precision) }}</td>
+				<td>{{ row[1].toFixed(precision) }}</td>
+				<td>{{ row[2].toFixed(precision) }}</td>
+				<td>{{ row[3].toFixed(precision) }}</td>
+				<td>{{ row[4] }}</td>
+			</tr>
+		</table>
+		<!-- <p>
+			Обчислення
+		</p>
+		{{headers[4]}} -->
+		<br>
+		<div ng-attr-class="{{minIndex == $index &amp;&amp; 'min'}}" ng-style="minIndex == $index &amp;&amp; {'border':'1px solid green'}" ng-repeat="f in y_wave_formulas track by $index">
+			{{f}}
+		</div>
+		<p>
+			Базова функція для рівняння регресії
+		</p>
+		{{ baseFun }}
+		<p>Записуємо функціонал</p>
+		{{ functional }}
+
+		<p>Система рівнянь</p>
+		{{system(minIndex)}}
 
 
-        <table class="table">
-          <tr>
-            <th>Змінна</th>
-            <th>Значення</th>
-            <th>Невідоме</th>
-          </tr>
-          <tr>
-            <td>FV</td>
-            <td><input class="form-control" type="number" ng-model="fv" ng-change="evaluate()"></td>
-            <td><input class="radio-inline" type="radio" name="unknown" value="fv"></td>
-          </tr>
-          <tr>
-            <td>PV</td>
-            <td><input class="form-control" type="number" ng-model="pv" ng-change="evaluate()"></td>
-            <td><input class="radio-inline" type="radio" name="unknown" value="pv"></td>
-          </tr>
-          <tr>
-            <td>n</td>
-            <td><input class="form-control" type="number" ng-model="n" ng-change="evaluate()"></td>
-            <td><input class="radio-inline" type="radio" name="unknown" value="n"></td>
-          </tr>
-          <tr>
-            <td>d</td>
-            <td><input class="form-control" type="number" ng-model="d" step="0.01" ng-change="evaluate()"></td>
-            <td><input class="radio-inline" type="radio" name="unknown" value="d"></td>
-          </tr>
-        </table>
+	</div>
 
-        <h1>Графік</h1>
-        <div id="box" class="jxgbox" style="width:1000px; height:800px;"></div>
-
-    </div>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <script type="text/javascript" src="./jsxgraphcore.js"></script>
-    <script src="main.js"></script>
-  </body>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.4/angular.min.js"></script>
+	<script src="main.js"></script>
+</body>
 </html>
