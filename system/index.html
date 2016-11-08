@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<title>MathJax TeX Test Page</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+</head>
+<body>
+
+	<!-- <p><br> -->
+		<!-- Контрольна робота<br>з теорії систем<br>студента гр. ПМ-41 <br> Левантовича Богдана <br>Варіант №9<br><br><br>	</p> -->
+	<div ng-controller="myCtrl" class="container">
+
+		<table class="table-bordered">
+			<tr class="text-center">
+				<td> U</td>
+				<td ng-repeat="u in U">{{ u }}</td>
+			</tr>
+			<tr class="text-center">
+				<td> Y</td>
+				<td ng-repeat="y in Y">{{ y }}</td>
+			</tr>
+		</table>
+
+		<br>
+		<p>Середні значення</p>
+		<br><div>
+			{{ generateFormulas(U, 'u').mean }}<br>
+			{{ generateFormulas(U, 'u').harm }}<br>
+			{{ generateFormulas(U, 'u').geom }}<br>
+			{{ generateFormulas(Y, 'y').mean }}<br>
+			{{ generateFormulas(Y, 'y').harm }}<br>
+			{{ generateFormulas(Y, 'y').geom }}<br>
+		</div>
+		<br><br><br>
+		<table class="table-bordered">
+			<th class="text-center" ng-repeat="h in headers">
+				{{ h }}
+			</th>
+			<tr ng-style="minIndex == $index &amp;&amp; {'background-color':'green'}" class="text-center" ng-repeat="row in table">
+				<td>{{ $index + 1}}</td>
+				<td>{{ row[0].toFixed(precision) }}</td>
+				<td>{{ row[1].toFixed(precision) }}</td>
+				<td>{{ row[2].toFixed(precision) }}</td>
+				<td>{{ row[3].toFixed(precision) }}</td>
+				<td>{{ row[4] }}</td>
+			</tr>
+		</table>
+		<!-- <p>
+			Обчислення
+		</p>
+		{{headers[4]}} -->
+		<br>
+		<div ng-attr-class="{{minIndex == $index &amp;&amp; 'min'}}" ng-style="minIndex == $index &amp;&amp; {'border':'1px solid green'}" ng-repeat="f in y_wave_formulas track by $index">
+			{{f}}
+		</div>
+		<p>
+			Базова функція для рівняння регресії
+		</p>
+		{{ baseFun }}
+		<p>Записуємо функціонал</p>
+		{{ functional }}
+
+		<p>Система рівнянь</p>
+		{{system(minIndex)}}
+
+
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.4/angular.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
