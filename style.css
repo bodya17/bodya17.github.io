@@ -1,27 +1,4 @@
-body {
-  font-family: helvetica;
-}
-
-td {
-    width: 80px;
-}
-
 p {
   text-align: center;
   font-size: 24px;
-}
-
-.min {
-  text-align: center;
-}
-
-.min::after {
-    content: "Мінімальне значення";
-    background-color: yellow;
-    color: red;
-    font-weight: bold;
-}
-
-.MathJax_Display {
-  display: inline-block;
 }
