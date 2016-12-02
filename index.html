@@ -10,6 +10,11 @@
     <div class="foo" id="rect">
 
     </div>
+
+
+    <button id="on">On</button>
+    <button id="off">Off</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -23,16 +28,28 @@
       firebase.initializeApp(config);
       var bigOne = document.getElementById('bigOne');
       var dbRef = firebase.database().ref().child('coords');
-      var left = 100;
-      var ceil = 100;
-      var x = 0;
-      var y = 0;
-      
-      dbRef.on('value', snap => {
-        x = snap.val().x;
-        y = snap.val().y;
-      });
-
+      // var left = 100;
+      // var ceil = 100;
+      // var x = 0;
+      // var y = 0;
+      //
+      // dbRef.on('value', snap => {
+      //   x = snap.val().x;
+      //   y = snap.val().y;
+      // });
+      // console.log(firebase.database().ref().set({
+      //   coords: {'x': 150, 'y': 700}
+      // }))
+      $('#on').on('click', function() {
+        firebase.database().ref().set({
+          on: true
+        })
+      })
+      $('#off').on('click', function() {
+        firebase.database().ref().set({
+          on: false
+        })
+      })
       setInterval(function () {
         document.getElementById('rect').style.left = `${left+=x*10}px`;
         document.getElementById('rect').style.top = `${ceil+=-y*10}px`;
