@@ -11,41 +11,47 @@
 
   <button id='but'>Click me</button>
 <script>
-  var but = document.getElementById('but')
-  but.addEventListener('click', function() {
-    console.group('hi')
-    console.log('Some debugging info')
-    console.groupEnd('hi')
-  })
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if(!window.SpeechRecognition)
-    alert('no speech recognition')
-  const recognition = new SpeechRecognition();
-  recognition.interimResults = true;
-
-  let p = document.createElement('p');
-  const words = document.querySelector('.words');
-  words.appendChild(p);
-
-  recognition.addEventListener('result', e => {
-    console.log('result event triggered!')
-    const transcript = Array.from(e.results)
-      .map(result => result[0])
-      .map(result => result.transcript)
-      .join('');
-
-      const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
-      p.textContent = poopScript;
-
-      if (e.results[0].isFinal) {
-        p = document.createElement('p');
-        words.appendChild(p);
-      }
-  });
-
-  recognition.addEventListener('end', recognition.start);
-
+  // var but = document.getElementById('but')
+  // but.addEventListener('click', function() {
+  //   console.group('hi')
+  //   console.log('Some debugging info')
+  //   console.groupEnd('hi')
+  // })
+  // window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  //
+  // if(!window.SpeechRecognition)
+  //   alert('no speech recognition')
+  // const recognition = new SpeechRecognition();
+  // recognition.interimResults = true;
+  //
+  // let p = document.createElement('p');
+  // const words = document.querySelector('.words');
+  // words.appendChild(p);
+  //
+  // recognition.addEventListener('result', e => {
+  //   console.log('result event triggered!')
+  //   const transcript = Array.from(e.results)
+  //     .map(result => result[0])
+  //     .map(result => result.transcript)
+  //     .join('');
+  //
+  //     const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+  //     p.textContent = poopScript;
+  //
+  //     if (e.results[0].isFinal) {
+  //       p = document.createElement('p');
+  //       words.appendChild(p);
+  //     }
+  // });
+  //
+  // recognition.addEventListener('end', recognition.start);
+  //
+  // recognition.start();
+  var recognition = new webkitSpeechRecognition();
+  console.log(recognition);
+  recognition.onresult = function(event) {
+    console.log(event);
+  }
   recognition.start();
 
 </script>
