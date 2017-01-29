@@ -9,8 +9,14 @@
   <div class="words" contenteditable>
   </div>
 
+  <button id='but'>Click me</button>
 <script>
-
+  var but = document.getElementById('but')
+  but.addEventListener('click', function() {
+    console.group('hi')
+    console.log('Some debugging info')
+    console.groupEnd('hi')
+  })
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if(!window.SpeechRecognition)
