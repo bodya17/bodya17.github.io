@@ -1,7 +1,0 @@
-.foo {
-  width: 100px;
-  position: absolute;
-  height: 100px;
-  background-color: red;
-  transition: all 0.5s ease-in-out;
-}
