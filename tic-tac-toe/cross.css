@@ -1,0 +1,97 @@
+table.main-diagonal::after {
+    content: '';
+    display: block;
+    top: -5%;
+    right: 0;
+    left: 48%;
+    position: absolute;
+    width: 6%;
+    height: 110%;
+    transform: rotate(-45deg);
+    background: grey;
+}
+
+table.secondary-diagonal::after {
+    content: '';
+    display: block;
+    top: -5%;
+    right: 0;
+    left: 48%;
+    position: absolute;
+    width: 6%;
+    height: 110%;
+    transform: rotate(45deg);
+    background: grey;
+}
+
+table.middle-column::after {
+    content: '';
+    display: block;
+    top: -5%;
+    right: 0;
+    left: 48%;
+    position: absolute;
+    width: 6%;
+    height: 110%;
+    background: grey;
+}
+
+table.first-column::after {
+    content: '';
+    display: block;
+    top: -5%;
+    right: 0;
+    left: calc(48% - 33.3333333%);
+    position: absolute;
+    width: 6%;
+    height: 110%;
+    background: grey;
+}
+
+table.third-column::after {
+    content: '';
+    display: block;
+    top: -5%;
+    right: 0;
+    left: calc(48% + 33.3333333%);
+    position: absolute;
+    width: 6%;
+    height: 110%;
+    background: grey;
+}
+
+table.middle-row::after {
+    content: '';
+    display: block;
+    top: 0;
+    left: -5%;
+    top: 47%;
+    position: absolute;
+    width: 110%;
+    height: 6%;
+    background: grey;
+}
+
+table.first-row::after {
+    content: '';
+    display: block;
+    top: 0;
+    left: -5%;
+    top: calc(47% - 33.3333%);
+    position: absolute;
+    width: 110%;
+    height: 6%;
+    background: grey;
+}
+
+table.third-row::after {
+    content: '';
+    display: block;
+    top: 0;
+    left: -5%;
+    top: calc(47% + 33.3333%);
+    position: absolute;
+    width: 110%;
+    height: 6%;
+    background: grey;
+}

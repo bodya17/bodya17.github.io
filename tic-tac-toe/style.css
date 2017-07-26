@@ -1,0 +1,66 @@
+@import 'cross.css';
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.info {
+    text-align: center;
+}
+
+.center-table {
+    margin: 20px auto;
+}
+
+    td {
+        border: 1px solid black;
+        position: relative;
+    }
+
+    td.playerX::after {
+        content: '';
+        width: 16%;
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all 1s ease-in;
+        top: 0;
+        left: 42%;
+        transform: rotate(-45deg);
+        border-radius: 10px;
+        background: red;
+    }
+
+    td.playerX::before {
+        content: '';
+        width: 16%;
+        display: block;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 42%;
+        transform: rotate(45deg);
+        border-radius: 10px;
+        background: red;
+    }
+
+    td.player0::before {
+        box-sizing: border-box;
+        content: '';
+        width: 80%;
+        height: 80%;
+        display: block;
+        left: 10%;
+        top: 10%;
+        border: 10px solid green;
+        position: absolute;
+        border-radius: 50%;
+    }
